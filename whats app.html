@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e5ded8;
+        }
+
+        .container {
+            display: flex;
+            height: 300vh;
+        }
+
+        .sidebar {
+            width: 450px;
+            background-color: #075E54;
+            color: rgb(249, 249, 249);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar .header {
+            display: flex;
+            align-items: right;
+            margin-bottom: 30px;
+        }
+
+        .sidebar .profile-img {
+            
+            border-radius: 100%;
+            margin-right: 10px;
+        }
+
+        .sidebar h1 {
+            font-size: 24px;
+            font-weight: 100;
+        }
+
+        .chat-list {
+            flex-grow: 5;
+        }
+
+        .contact {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact:hover {
+            background-color: #128C7E;
+        }
+
+        .contact-img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .contact-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            
+        }
+
+        .contact-info p {
+            font-size: 14px;
+            color: #f1f1f1;
+            
+        }
+
+        /* Chat Window Styles */
+        .chat-container {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
+            width: 20%;
+        }
+
+        .chat-window {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            min-width: 100px;
+        }
+
+        /* Show the selected chat window when its radio button is checked */
+        input[type="radio"]:checked + .chat-window {
+            display: flex;
+        }
+
+        .chat-window .header {
+            background-color: #128C7E;      
+            color: rgb(10, 8, 8);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-window h2 {
+            margin-left: 10px;
+        }
+
+        .messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .message {
+            max-width: 60%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 50px;
+            word-wrap: break-word;
+        }
+
+        .sender {
+            background-color: #e7e7e7;
+            align-self: flex-start;
+        }
+
+        .receiver {
+            background-color: #DCF8C6;
+            align-self: flex-end;
+        }
+
+        .message-input {
+            display: flex;
+            padding: 10px;
+            background-color: #000000;
+            border-top: 1px solid #ccc;
+        }
+
+        .message-input input {
+            width: 85%;
+            padding: 10px;
+            border-radius: 50px;       
+            border: none;
+            outline: none;
+        }
+
+        .message-input button {
+            width: 10%;
+            padding: 10px;
+            border-radius: px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .message-input button:hover {
+            background-color: #128C7E;
+        }
+
+        /* Hidden Radio Buttons */
+        input[type="radio"] {
+            display: none;
+        }
+
+        @media (max-width: 100px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 20%;
+                height: auto;
+            }
+
+            .chat-window {
+                width: 20%;
+                min-width: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="header">
+            <img src="image1.jpeg" alt="Profile" class="profile-img" height="60" width="60">
+            <h1>WhatsApp</h1>
+        </div>
+        <div class="chat-list">
+            <!-- Contacts -->
+            <label for="chat1" class="contact">
+                <img src="image.jpeg" alt="User" class="contact-img">
+                <div class="contact-info">
+                    <h3>Talal Atta</h3>
+                    <p>Hello!</p>
+                </div>
+            </label>
+            <label for="chat2" class="contact">
+                <img src="image3.png" alt="User" class="contact-img">
+                <div class="contact-info">
+                    <h3>Ameer Khan</h3>
+                    <p>See you soon!</p>
+                </div>
+            </label>
+            <label for="chat3" class="contact">
+                <img src="image2.png" alt="User" class="contact-img">
+                <div class="contact-info">
+                    <h3>Saifal Ashiq</h3>
+                    <p>How are you?</p>
+                </div>
+            </label>
+            <label for="chat4" class="contact">
+                <img src="image.jpeg" alt="User" class="contact-img">
+                <div class="contact-info">
+                    <h3>Ali</h3>
+                    <p>Hi!</p>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Chat Windows -->
+    <div class="chat-container">
+        <!-- Chat Window 1 (Talal Atta) -->
+        <input type="radio" id="chat1" name="chat" />
+        <div class="chat-window">
+            <div class="header">
+                <img src="image.jpeg" alt="User" class="profile-img">
+                <h2>Talal Atta</h2>
+            </div>
+            <div class="messages">
+                <div class="message sender">
+                    <p>Hello!</p>
+                </div>
+                <div class="message receiver">
+                    <p>Hi, how are you?</p>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" placeholder="Type a message...">
+                <button>Send</button>
+            </div>
+        </div>
+
+        <!-- Chat Window 2 (Ameer Khan) -->
+        <input type="radio" id="chat2" name="chat" />
+        <div class="chat-window">
+            <div class="header">
+                <img
+                src="image3.png"
+                alt="Profile"
+                class="profile-img"
+                hight="100"
+                width="100"
+              />
+                <h2>Ameer Khan</h2>
+            </div>
+            <div class="messages">
+                <div class="message sender">
+                    <p>Hey, let's talk soon!</p>
+                </div>
+                <div class="message receiver">
+                    <p>Sure, see you soon!</p>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" placeholder="Type a message...">
+                <button>Send</button>
+            </div>
+        </div>
+
+        <!-- Chat Window 3 (Saifal Ashiq) -->
+        <input type="radio" id="chat3" name="chat" />
+        <div class="chat-window">
+            <div class="header">
+                <img
+                src="image2.png"
+                alt="Profile"
+                class="profile-img"
+                hight="100"
+                width="100"
+              />
+                <h2>Saifal Ashiq</h2>
+            </div>
+            <div class="messages">
+                <div class="message sender">
+                    <p>How are you bro</p>
+                </div>
+                <div class="message receiver">
+                    <p>I am fine bro</p>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" placeholder="Type a message...">
+                <button>Send</button>
+            </div>
+        </div>
+
+        <!-- Chat Window 4 (Ali) -->
+        <input type="radio" id="chat4" name="chat" />
+        <div class="chat-window">
+            <div class="header">
+                <img src="image.jpeg" alt="User" class="profile-img">
+                <h2>Ali</h2>
+            </div>
+            <div class="messages">
+                <div class="message sender">
+                    <p>Hi, what's up?</p>
+                </div>
+                <div class="message receiver">
+                    <p>All good! How about you?</p>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" placeholder="Type a message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
